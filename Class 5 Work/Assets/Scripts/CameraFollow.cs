@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     public Transform followTransform;
     public BoxCollider2D worldBounds;
 
-    float xMin, xMax, yMin, yMax;
+    public float xMin, xMax, yMin, yMax;
     float camY, camX;
 
     float camSize;
@@ -27,6 +27,7 @@ public class CameraFollow : MonoBehaviour
     {
         xMin = worldBounds.bounds.min.x;
         xMax = worldBounds.bounds.max.x;
+        Debug.Log(xMax);
         yMin = worldBounds.bounds.min.y;
         yMax = worldBounds.bounds.max.y;
 
@@ -52,7 +53,7 @@ public class CameraFollow : MonoBehaviour
         //that being said, clamp numbers of our range (limit them)
         //clamp the transform follow pos between ymin etc and y max etc
         camY = Mathf.Clamp(followTransform.position.y, yMin + camSize, yMax - camSize);
-        camX = Mathf.Clamp(followTransform.position.x, xMin + camRatio, xMax = camRatio);
+        camX = Mathf.Clamp(followTransform.position.x, xMin + camRatio, xMax - camRatio);
 
         //lerping to where the player is
         smoothPos = Vector3.Lerp(gameObject.transform.position, new Vector3(camX, camY, gameObject.transform.position.z), smoothRate);
